@@ -5,7 +5,7 @@ import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'effectively-hidden-thunder',
+  title: 'Body Politic',
 
   projectId: 'k8p6uw8a',
   dataset: 'body-politic-dev',
