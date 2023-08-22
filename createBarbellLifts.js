@@ -23,14 +23,12 @@ let queue = cq()
     })
   })
 
-const getWorkouts = async () => {
+const createBarbellLifts = async () => {
   const lifts = await fetch('https://api.sugarwod.com/v2/barbelllifts', config)
     .then((response) => response.json())
     .then((json) => json.data)
 
   const categories = await client.fetch(`*[_type == 'category' && !(_id in path('drafts.**'))]`)
-
-  console.log(categories)
 
   lifts.forEach((lift) => {
     queue(lift).then(async () => {
@@ -52,4 +50,4 @@ const getWorkouts = async () => {
   })
 }
 
-getWorkouts()
+createBarbellLifts()
