@@ -1,4 +1,6 @@
 import React from 'react'
+import YouTube from 'react-youtube'
+import { YoutubePreview } from '../components/YoutubePreview'
 
 export const movement = {
   name: 'movement',
@@ -33,6 +35,9 @@ export const movement = {
             {
               name: 'id',
               type: 'string',
+              components: {
+                input: YoutubePreview
+              }
             },
             {
               name: 'title',

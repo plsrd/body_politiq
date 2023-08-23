@@ -1,27 +1,7 @@
 import fetch from 'node-fetch'
-import 'dotenv/config'
-import cq from 'concurrent-queue'
-import {getCliClient} from 'sanity/cli'
-
-const client = getCliClient({apiVersion: '2021-08-21'})
-
-const config = {
-  method: 'GET', // *GET, POST, PUT, DELETE, etc.
-  credentials: 'include', // include, *same-origin, omit
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: process.env.SUGARWOD_API_KEY,
-  },
-}
-
-// Create a queue to limit the rate at which you write changes to Sanity
-let queue = cq()
-  .limit({concurrency: 25})
-  .process(function (task) {
-    return new Promise(function (resolve, reject) {
-      setTimeout(resolve.bind(undefined, task), 1000)
-    })
-  })
+import {queue} from '../helpers/queue'
+import {config} from '../helpers/sugarWodConfig'
+import {client} from '../helpers/client'
 
 const createBarbellLifts = async () => {
   const lifts = await fetch('https://api.sugarwod.com/v2/barbelllifts', config)
